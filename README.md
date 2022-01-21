@@ -121,3 +121,22 @@ Authentication is valid for **8 hours**, and once it expires, this
 process will need to be repeated. In the future, we might have a
 web app or other process to make this less painful. However, keeping
 the length of this session limited drastically helps with security too.
+
+## Alternatives
+
+1. Create an ssh key specifically for the hosted service (JupyterHub, HPC cluster, etc)
+   and add it to your GitHub account. If the key doesn't have a passphrase, this is
+   very insecure - anyone who can exfiltrate your key once can keep it and use it
+   whenever they wish. Even with a passphrase, the key can still be exfiltrated and
+   passphrase stolen when used. There's also no way to restrict which repositories
+   this can push to, which is a big issue.
+
+2. Create a [Personal Access Token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token)
+   and use that. This is a little *more* insecure than the ssh key, as it can be used
+   to make requests on your behalf too after being stolen! There is also no way to
+   restrict which repositories you can push to.
+
+3. Create a [GitHub deploy key](https://docs.github.com/en/developers/overview/managing-deploy-keys)
+   for each repository you want to push to, for each hosted service you want to push
+   from. While this lets you control which repos this ssh key can access, it is still
+   stored long term at risk and can be exfiltrated.
