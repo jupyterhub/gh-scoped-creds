@@ -2,7 +2,7 @@ from setuptools import find_packages, setup
 
 setup(
     name="github-app-user-auth",
-    version="1.0",
+    version="1.1",
     url="https://github.com/yuvipanda/github-app-user-auth",
     license="3-clause BSD",
     author="Yuvi Panda",
