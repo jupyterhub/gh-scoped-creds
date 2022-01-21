@@ -73,8 +73,8 @@ def main():
     expires_in_hours = expires_in / 60 / 60
     print(f"Authentication will expire in {expires_in_hours:0.1f} hours")
 
-    # Create the file with appropriate permissions (0660) so other users can't read it
-    with open(os.open(args.git_credentials_path, os.O_WRONLY | os.O_CREAT, 0o660), "w") as f:
+    # Create the file with appropriate permissions (0600) so other users can't read it
+    with open(os.open(args.git_credentials_path, os.O_WRONLY | os.O_CREAT, 0o600), "w") as f:
         f.write(f"https://x-access-token:{access_token}@github.com\n")
 
 
