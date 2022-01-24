@@ -88,6 +88,12 @@ pip install github-app-user-auth
 	git config --global credential.helper "store --file=/tmp/github-app-git-credentials"
 	```
 
+   **Note for non-container uses**: If your users are on a HPC system or similar,
+   where `/tmp` is not isolated for each user, you must set the file path to be
+   under `$HOME`. The `github-app-user-auth` commandline tool used by end users
+   (documented below) accepts a `--git-credentials-path` that can be explicitly
+   set. The same path must be used in `gitconfig` here as well.
+
 2. `github-app-user-auth` will need to know the "Client ID" of the created GitHub app to
     perform authentication. This can be either set with the environment variable
 	`GITHUB_APP_CLIENT_ID`, or be passed in as a commandline parameter `--client-id` to
@@ -113,6 +119,12 @@ not be too cumborsome.
 The hosted service must have `github-app-user-auth` installed.
 
 1. Open a terminal, and type `github-app-user-auth`.
+
+   If you're on a non-containerized system (like a HPC), you must
+   also specify the path to put the credentials files in explicitly
+   with `--git-credentials-path`. The same path must be used in the
+   `gitconfig` configuration mentioned earlier.
+
 2. It should give you a link to go to, and a code to input into the web
    page when that link is opened. Open the link, enter the code there.
 3. Grant access to the device in the web page, and you're done!
