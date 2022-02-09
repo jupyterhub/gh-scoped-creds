@@ -77,7 +77,3 @@ def main():
     # Create the file with appropriate permissions (0600) so other users can't read it
     with open(os.open(args.git_credentials_path, os.O_WRONLY | os.O_CREAT, 0o600), "w") as f:
         f.write(f"https://x-access-token:{access_token}@github.com\n")
-
-
-if __name__ == "__main__":
-    main()
