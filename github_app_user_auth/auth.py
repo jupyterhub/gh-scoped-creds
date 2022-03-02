@@ -85,7 +85,12 @@ def main(in_jupyter=False):
 
     access_token, expires_in = do_authenticate_device_flow(args.client_id, in_jupyter)
     expires_in_hours = expires_in / 60 / 60
-    print(f"Success! Authentication will expire in {expires_in_hours:0.1f} hours.")
+    success = f"Success! Authentication will expire in {expires_in_hours:0.1f} hours."
+    if in_jupyter:
+        from IPython.display import display, HTML
+        display(HTML(f'<p style="background-color:lightgreen;">{success}</p>'))
+    else:
+        print(success)
 
     # Create the file with appropriate permissions (0600) so other users can't read it
     with open(os.open(args.git_credentials_path, os.O_WRONLY | os.O_CREAT, 0o600), "w") as f:
