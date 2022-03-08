@@ -85,7 +85,8 @@ def main(in_jupyter=False):
 
     access_token, expires_in = do_authenticate_device_flow(args.client_id, in_jupyter)
     expires_in_hours = expires_in / 60 / 60
-    success = f"Success! Authentication will expire in {expires_in_hours:0.1f} hours."
+    success = (f"Success! Authentication will expire in {expires_in_hours:0.1f} hours.\n<br>"
+               f"Process completed on: {time.asctime()}.")
     if in_jupyter:
         from IPython.display import display, HTML
         display(HTML(f'<p style="background-color:lightgreen;">{success}</p>'))
