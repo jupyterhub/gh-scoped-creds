@@ -5,7 +5,7 @@ import time
 import os
 
 
-def do_authenticate_device_flow(client_id):
+def do_authenticate_device_flow(client_id, in_jupyter=False):
     """
     Authenticate user with given GitHub app using GitHub OAuth Device flow
 
@@ -21,10 +21,23 @@ def do_authenticate_device_flow(client_id):
         headers={"Accept": "application/json"},
     ).json()
 
-    print(
-        f'Go to {verification_resp["verification_uri"]} and enter the code: {verification_resp["user_code"]}'
-    )
-    print('You have 15 minutes to enter this code (you can copy-paste it from above).')
+    url  = verification_resp["verification_uri"]
+    code = verification_resp["user_code"]
+
+    if in_jupyter:
+        from IPython.display import display, Javascript
+
+        display(Javascript(f'navigator.clipboard.writeText("{code}");'))
+        print(f'The code {code} has been copied to your clipboard.')
+        print(f'You have 15 minutes to go to {url} and paste it there.\n')
+        ans = input("Hit ENTER to open that page in a new tab (type anything to cancel)>")
+        if ans:
+            print("Automatic opening canceled!")
+        else:
+            display(Javascript(f'window.open("{url}", "_blank");'))
+    else:
+        print(f'You have 15 minutes to go to {url} and enter the code: {code}')
+
     print('Waiting...', end='', flush=True)
 
     while True:
@@ -44,7 +57,7 @@ def do_authenticate_device_flow(client_id):
             return access_resp["access_token"], access_resp["expires_in"]
 
 
-def main():
+def main(in_jupyter=False):
     argparser = argparse.ArgumentParser()
     argparser.add_argument(
         "--client-id",
@@ -70,14 +83,16 @@ def main():
         )
         sys.exit(1)
 
-    access_token, expires_in = do_authenticate_device_flow(args.client_id)
+    access_token, expires_in = do_authenticate_device_flow(args.client_id, in_jupyter)
     expires_in_hours = expires_in / 60 / 60
-    print(f"Success! Authentication will expire in {expires_in_hours:0.1f} hours.")
+    success = (f"Success! Authentication will expire in {expires_in_hours:0.1f} hours.\n<br>"
+               f"Process completed on: {time.asctime()}.")
+    if in_jupyter:
+        from IPython.display import display, HTML
+        display(HTML(f'<p style="background-color:lightgreen;">{success}</p>'))
+    else:
+        print(success)
 
     # Create the file with appropriate permissions (0600) so other users can't read it
     with open(os.open(args.git_credentials_path, os.O_WRONLY | os.O_CREAT, 0o600), "w") as f:
         f.write(f"https://x-access-token:{access_token}@github.com\n")
-
-
-if __name__ == "__main__":
-    main()
