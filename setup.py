@@ -15,7 +15,7 @@ setup(
     install_requires=["requests"],
     entry_points={
         "console_scripts": [
-            "github-app-user-auth = github_app_user_auth.auth:main",
+            "github-app-user-auth = github_app_user_auth:main",
         ],
     },
 )

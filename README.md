@@ -118,15 +118,26 @@ not be too cumborsome.
 
 The hosted service must have `github-app-user-auth` installed.
 
-1. Open a terminal, and type `github-app-user-auth` (you can also type `!github-app-user-auth` in a Jupyter Console or Notebook, which has the convenience of rendering the URL you'll need to access as a clickable link).
+1. Open a terminal, and type `github-app-user-auth`. If you're in a Python based
+   Jupyter Notebook, you can also do:
+
+   ```python
+   import github_app_user_auth
+
+   %ghauth
+   ```
+
+   This will offer to open the page in a new window for you, and conveniently
+   copy the code you need to paste in the new window too.
 
    If you're on a non-containerized system (like a HPC), you must
    also specify the path to put the credentials files in explicitly
    with `--git-credentials-path`. The same path must be used in the
    `gitconfig` configuration mentioned earlier.
 
-2. It should give you a link to go to, and a code to input into the web
-   page when that link is opened. Open the link, enter the code there (the page accepts pasting, so you can copy it from the output).
+2. It should give you a link to go to, and a code to input into the web page
+   when that link is opened. Open the link, enter the code there (the page accepts
+   pasting, so you can copy it from the output).
 
 3. Grant access to the device in the web page, and you're done!
 
