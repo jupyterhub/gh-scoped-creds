@@ -52,18 +52,21 @@ pip install github-app-user-auth
    when they authenticate. Provide a link to a descriptive page explaining your
    service (if you are using a JupyterHub, this could be just your JupyterHub URL).
 
-3. Disable webhooks (uncheck the 'Active' checkbox under 'Webhooks'). All other
+3. Select 'Enable Device Flow', as we rely on the [device flow](https://docs.github.com/en/enterprise-server@3.3/developers/apps/building-oauth-apps/authorizing-oauth-apps#device-flow)
+   authentication method.
+
+4. Disable webhooks (uncheck the 'Active' checkbox under 'Webhooks'). All other
    textboxes can be left empty.
 
-4. Under 'Repository permissions', select 'Read & write' for 'Contents'. This
+5. Under 'Repository permissions', select 'Read & write' for 'Contents'. This
    will provide users authenticating via the app just enough permissions to push
    and pull from repositories.
 
-5. Under 'Where can this GitHub App be installed?', select 'Any account'. This will
+6. Under 'Where can this GitHub App be installed?', select 'Any account'. This will
    enable users to push to their own user repositories or other organization repositaries,
    rather than just the repos of the user or organization owning this GitHub app.
 
-6. Save the `Client ID` provided in the information page of the app. You'll need this
+7. Save the `Client ID` provided in the information page of the app. You'll need this
    in the client. Save the `Public link` as well, as users will need to use this to grant
    access to particular repositories.
 
