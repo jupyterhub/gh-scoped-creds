@@ -2,7 +2,7 @@ from setuptools import find_packages, setup
 
 setup(
     name="gh-scoped-creds",
-    version="2.1",
+    version="2.2",
     url="https://github.com/yuvipanda/gh-scoped-creds",
     license="3-clause BSD",
     author="Yuvi Panda",
