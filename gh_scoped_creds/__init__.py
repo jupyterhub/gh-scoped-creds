@@ -70,14 +70,14 @@ def main(args=None, in_jupyter=False):
     argparser = argparse.ArgumentParser()
     argparser.add_argument(
         "--client-id",
-        default=os.environ.get("GITHUB_APP_CLIENT_ID"),
+        default=os.environ.get("GH_SCOPED_CREDS_CLIENT_ID"),
         help="""
         Client ID of the GitHub app to authenticate with as the user
         """.strip(),
     )
     argparser.add_argument(
         "--git-credentials-path",
-        default="/tmp/github-app-git-credentials",
+        default="/tmp/github-scoped-credentials",
         help="""
         Path to write the git-credentials file to. Current contents will be overwritten!
         """.strip(),
@@ -87,7 +87,7 @@ def main(args=None, in_jupyter=False):
 
     if not args.client_id:
         print(
-            "--client-id must be specified or GITHUB_APP_CLIENT_ID environment variable must be set",
+            "--client-id must be specified or GH_SCOPED_CREDS_CLIENT_ID environment variable must be set",
             file=sys.stderr,
         )
         sys.exit(1)
@@ -129,7 +129,7 @@ try:
     if in_jupyter:
 
         @register_line_magic
-        def ghauth(line):
+        def ghscopedcreds(line):
             """
             IPython magic for authenticating to GitHub
             """
