@@ -1,13 +1,13 @@
 from setuptools import find_packages, setup
 
 setup(
-    name="github-app-user-auth",
-    version="1.1",
-    url="https://github.com/yuvipanda/github-app-user-auth",
+    name="gh-scoped-creds",
+    version="2.2",
+    url="https://github.com/yuvipanda/gh-scoped-creds",
     license="3-clause BSD",
     author="Yuvi Panda",
     author_email="yuvipanda@gmail.com",
-    description="Collection of git-credential helpers",
+    description="Temporary, well scoped credentials for pushing to GitHub",
     long_description=open("README.md").read(),
     long_description_content_type="text/markdown",
     packages=find_packages(),
@@ -15,7 +15,9 @@ setup(
     install_requires=["requests"],
     entry_points={
         "console_scripts": [
-            "github-app-user-auth = github_app_user_auth:main",
+            # Backwards compatible script providing former (pre 2.0) name
+            "github-app-user-auth = gh_scoped_creds:main",
+            "gh-scoped-creds = gh_scoped_creds:main",
         ],
     },
 )

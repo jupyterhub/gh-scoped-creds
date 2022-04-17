@@ -1,6 +1,7 @@
-# github-app-user-auth
+# gh-scoped-creds
 
-Provide fine-grained push access to GitHub from a JupyterHub.
+Provide finely scoped push access to GitHub from a JupyterHub or
+HPC system.
 
 ## Goals
 
@@ -24,19 +25,21 @@ These goals are accomplished by:
    and GitHub organization admins can then provide fine grained, repo
    level access to this GitHub app - Users can only push to repos that have the
    app installed.
-2. A commandline tool (`github-app-user-auth`) that lets specific users
+2. A commandline tool (`gh-scoped-creds`) that lets specific users
    authorize push access to the selected repositories temporarily - a token
    that expires after 8 hours.
+3. An IPython Magic (`%ghscopedcreds`) that provides a convenient wrapper to call
+   `gh-scoped-creds` from inside a Jupyter Notebook.
 
 In the future, an optional web app might also be provided to aid in
 authentication.
 
 ## Installation
 
-You can install `github-app-user-auth` from PyPI.
+You can install `gh-scoped-creds` from PyPI.
 
 ```bash
-pip install github-app-user-auth
+pip install gh-scoped-creds
 ```
 
 ## GitHub App configuration
@@ -72,8 +75,8 @@ pip install github-app-user-auth
 
 ## Client configuration
 
-1. `github-app-user-auth` uses `git-credentials-store` to provide appropriate authentication,
-    by writing to a `/tmp/github-app-git-credentials` file. This makes sure we don't override
+1. `gh-scoped-creds` uses `git-credentials-store` to provide appropriate authentication,
+    by writing to a `/tmp/gh-scoped-creds` file. This makes sure we don't override
 	the default `~/.git-credentials` file someone might be using. `git` will have to be configured to use
 	the new file.
 
@@ -82,25 +85,25 @@ pip install github-app-user-auth
 
 	```ini
 	[credential]
-        helper = store --file=/tmp/github-app-git-credentials
+        helper = store --file=/tmp/gh-scoped-creds
 	```
 
 	Or you can run the following command (this puts it in `~/.gitconfig`)
 
 	```
-	git config --global credential.helper "store --file=/tmp/github-app-git-credentials"
+	git config --global credential.helper "store --file=/tmp/gh-scoped-creds"
 	```
 
    **Note for non-container uses**: If your users are on a HPC system or similar,
    where `/tmp` is not isolated for each user, you must set the file path to be
-   under `$HOME`. The `github-app-user-auth` commandline tool used by end users
+   under `$HOME`. The `gh-scoped-creds` commandline tool used by end users
    (documented below) accepts a `--git-credentials-path` that can be explicitly
    set. The same path must be used in `gitconfig` here as well.
 
-2. `github-app-user-auth` will need to know the "Client ID" of the created GitHub app to
+2. `gh-scoped-creds` will need to know the "Client ID" of the created GitHub app to
     perform authentication. This can be either set with the environment variable
-	`GITHUB_APP_CLIENT_ID`, or be passed in as a commandline parameter `--client-id` to
-	the `github-app-user-auth` script when users use it to authenticate.
+	`GH_SCOPED_CREDS_CLIENT_ID`, or be passed in as a commandline parameter `--client-id` to
+	the `gh-scoped-creds` script when users use it to authenticate.
 
 ## Usage
 
@@ -119,15 +122,15 @@ not be too cumborsome.
 
 ### Authenticate to GitHub
 
-The hosted service must have `github-app-user-auth` installed.
+The hosted service must have `gh-scoped-creds` installed.
 
-1. Open a terminal, and type `github-app-user-auth`. If you're in a Python based
+1. Open a terminal, and type `gh-scoped-creds`. If you're in a Python based
    Jupyter Notebook, you can also do:
 
    ```python
-   import github_app_user_auth
+   import gh_scoped_creds
 
-   %ghauth
+   %ghscopedauth
    ```
 
    This will offer to open the page in a new window for you, and conveniently

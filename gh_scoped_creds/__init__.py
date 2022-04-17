@@ -37,13 +37,6 @@ def do_authenticate_device_flow(client_id, in_jupyter=False):
         display(Javascript(f'navigator.clipboard.writeText("{code}");'))
         print(f"The code {code} has been copied to your clipboard.")
         print(f"You have 15 minutes to go to {url} and paste it there.\n")
-        ans = input(
-            "Hit ENTER to open that page in a new tab (type anything to cancel)>"
-        )
-        if ans:
-            print("Automatic opening canceled!")
-        else:
-            display(Javascript(f'window.open("{url}", "_blank");'))
     else:
         print(f"You have 15 minutes to go to {url} and enter the code: {code}")
 
@@ -70,14 +63,14 @@ def main(args=None, in_jupyter=False):
     argparser = argparse.ArgumentParser()
     argparser.add_argument(
         "--client-id",
-        default=os.environ.get("GITHUB_APP_CLIENT_ID"),
+        default=os.environ.get("GH_SCOPED_CREDS_CLIENT_ID"),
         help="""
         Client ID of the GitHub app to authenticate with as the user
         """.strip(),
     )
     argparser.add_argument(
         "--git-credentials-path",
-        default="/tmp/github-app-git-credentials",
+        default="/tmp/gh-scoped-creds",
         help="""
         Path to write the git-credentials file to. Current contents will be overwritten!
         """.strip(),
@@ -87,7 +80,7 @@ def main(args=None, in_jupyter=False):
 
     if not args.client_id:
         print(
-            "--client-id must be specified or GITHUB_APP_CLIENT_ID environment variable must be set",
+            "--client-id must be specified or GH_SCOPED_CREDS_CLIENT_ID environment variable must be set",
             file=sys.stderr,
         )
         sys.exit(1)
@@ -129,7 +122,7 @@ try:
     if in_jupyter:
 
         @register_line_magic
-        def ghauth(line):
+        def ghscopedcreds(line):
             """
             IPython magic for authenticating to GitHub
             """
