@@ -102,7 +102,7 @@ pip install gh-scoped-creds
 
 2. `gh-scoped-creds` will need to know the "Client ID" of the created GitHub app to
     perform authentication. This can be either set with the environment variable
-	`GITHUB_APP_CLIENT_ID`, or be passed in as a commandline parameter `--client-id` to
+	`GH_SCOPED_CREDS_CLIENT_ID`, or be passed in as a commandline parameter `--client-id` to
 	the `gh-scoped-creds` script when users use it to authenticate.
 
 ## Usage
