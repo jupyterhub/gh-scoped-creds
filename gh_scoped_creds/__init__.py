@@ -77,7 +77,7 @@ def main(args=None, in_jupyter=False):
     )
     argparser.add_argument(
         "--git-credentials-path",
-        default="/tmp/github-scoped-credentials",
+        default="/tmp/gh-scoped-creds",
         help="""
         Path to write the git-credentials file to. Current contents will be overwritten!
         """.strip(),

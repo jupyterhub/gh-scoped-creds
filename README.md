@@ -76,7 +76,7 @@ pip install gh-scoped-creds
 ## Client configuration
 
 1. `gh-scoped-creds` uses `git-credentials-store` to provide appropriate authentication,
-    by writing to a `/tmp/github-scoped-credentials` file. This makes sure we don't override
+    by writing to a `/tmp/gh-scoped-creds` file. This makes sure we don't override
 	the default `~/.git-credentials` file someone might be using. `git` will have to be configured to use
 	the new file.
 
@@ -85,13 +85,13 @@ pip install gh-scoped-creds
 
 	```ini
 	[credential]
-        helper = store --file=/tmp/github-scoped-credentials
+        helper = store --file=/tmp/gh-scoped-creds
 	```
 
 	Or you can run the following command (this puts it in `~/.gitconfig`)
 
 	```
-	git config --global credential.helper "store --file=/tmp/github-scoped-credentials"
+	git config --global credential.helper "store --file=/tmp/gh-scoped-creds"
 	```
 
    **Note for non-container uses**: If your users are on a HPC system or similar,
