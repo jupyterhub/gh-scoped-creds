@@ -37,13 +37,6 @@ def do_authenticate_device_flow(client_id, in_jupyter=False):
         display(Javascript(f'navigator.clipboard.writeText("{code}");'))
         print(f"The code {code} has been copied to your clipboard.")
         print(f"You have 15 minutes to go to {url} and paste it there.\n")
-        ans = input(
-            "Hit ENTER to open that page in a new tab (type anything to cancel)>"
-        )
-        if ans:
-            print("Automatic opening canceled!")
-        else:
-            display(Javascript(f'window.open("{url}", "_blank");'))
     else:
         print(f"You have 15 minutes to go to {url} and enter the code: {code}")
 
