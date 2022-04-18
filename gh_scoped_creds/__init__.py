@@ -70,11 +70,11 @@ def main(args=None, in_jupyter=False):
         """.strip(),
     )
     argparser.add_argument(
-        '--github-app-url',
-        default=os.environ.get('GH_SCOPED_CREDS_APP_URL'),
+        "--github-app-url",
+        default=os.environ.get("GH_SCOPED_CREDS_APP_URL"),
         help="""
         URL where users can install & grant repo access to the app
-        """.strip()
+        """.strip(),
     )
     argparser.add_argument(
         "--git-credentials-path",
@@ -124,7 +124,9 @@ def main(args=None, in_jupyter=False):
         print(success)
 
     if args.github_app_url:
-        print(f'Visit {args.github_app_url} to manage list of repositories you can push to from this location')
+        print(
+            f"Visit {args.github_app_url} to manage list of repositories you can push to from this location"
+        )
 
 
 try:
