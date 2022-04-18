@@ -113,10 +113,7 @@ def main(args=None, in_jupyter=False):
     )
 
     expires_in_hours = expires_in / 60 / 60
-    success = (
-        f"Success! Authentication will expire in {expires_in_hours:0.1f} hours.\n"
-        f"Process completed on: {time.asctime()}."
-    )
+    success = f"Success! Authentication will expire in {expires_in_hours:0.1f} hours.\n"
 
     if in_jupyter:
         from IPython.display import HTML, display
