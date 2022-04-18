@@ -75,35 +75,23 @@ pip install gh-scoped-creds
 
 ## Client configuration
 
-1. `gh-scoped-creds` uses `git-credentials-store` to provide appropriate authentication,
-    by writing to a `/tmp/gh-scoped-creds` file. This makes sure we don't override
-	the default `~/.git-credentials` file someone might be using. `git` will have to be configured to use
-	the new file.
+1. `gh-scoped-creds` will need to know the "Client ID" of the created GitHub app to
+    perform authentication. This can be either set with the environment variable
+	`GH_SCOPED_CREDS_CLIENT_ID`, or be passed in as a commandline parameter `--client-id` to
+	the `gh-scoped-creds` script when users use it to authenticate.
 
-	You can put the following snippet in `/etc/gitconfig` (for containers) or in
-	`~/.gitconfig`:
-
-	```ini
-	[credential]
-        helper = store --file=/tmp/gh-scoped-creds
-	```
-
-	Or you can run the following command (this puts it in `~/.gitconfig`)
-
-	```
-	git config --global credential.helper "store --file=/tmp/gh-scoped-creds"
-	```
+1. `gh-scoped-creds` uses [`git-credentials-store`](https://git-scm.com/docs/git-credential-store)
+   to provide appropriate authentication, by writing to a `/tmp/gh-scoped-creds`
+   file. This makes sure we don't override the default `~/.git-credentials` file
+   someone might be using. `git` will be automatically configured (via an entry
+   in `~/.gitconfig`) to use this file for github.com credentials.  the new
+   file.
 
    **Note for non-container uses**: If your users are on a HPC system or similar,
    where `/tmp` is not isolated for each user, you must set the file path to be
    under `$HOME`. The `gh-scoped-creds` commandline tool used by end users
    (documented below) accepts a `--git-credentials-path` that can be explicitly
-   set. The same path must be used in `gitconfig` here as well.
-
-2. `gh-scoped-creds` will need to know the "Client ID" of the created GitHub app to
-    perform authentication. This can be either set with the environment variable
-	`GH_SCOPED_CREDS_CLIENT_ID`, or be passed in as a commandline parameter `--client-id` to
-	the `gh-scoped-creds` script when users use it to authenticate.
+   set.
 
 ## Usage
 

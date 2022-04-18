@@ -1,5 +1,6 @@
 import argparse
 import os
+import subprocess
 import sys
 import time
 
@@ -92,6 +93,17 @@ def main(args=None, in_jupyter=False):
         os.open(args.git_credentials_path, os.O_WRONLY | os.O_CREAT, 0o600), "w"
     ) as f:
         f.write(f"https://x-access-token:{access_token}@github.com\n")
+
+    # Tell git to use our new creds when talking to github
+    subprocess.check_call(
+        [
+            "git",
+            "config",
+            "--global",  # Modifies ~/.gitconfig
+            "credential.https://github.com.helper",
+            f"store --file={args.git_credentials_path}",
+        ]
+    )
 
     expires_in_hours = expires_in / 60 / 60
     success = (
