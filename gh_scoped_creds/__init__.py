@@ -1,8 +1,8 @@
 import argparse
 import os
+import subprocess
 import sys
 import time
-import subprocess
 
 import requests
 
@@ -99,7 +99,7 @@ def main(args=None, in_jupyter=False):
         [
             "git",
             "config",
-            "--global", # Modifies ~/.gitconfig
+            "--global",  # Modifies ~/.gitconfig
             "credential.https://github.com.helper",
             f"store --file={args.git_credentials_path}",
         ]
