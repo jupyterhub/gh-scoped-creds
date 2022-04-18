@@ -70,6 +70,13 @@ def main(args=None, in_jupyter=False):
         """.strip(),
     )
     argparser.add_argument(
+        '--github-app-url',
+        default=os.environ.get('GH_SCOPED_CREDS_APP_URL'),
+        help="""
+        URL where users can install & grant repo access to the app
+        """.strip()
+    )
+    argparser.add_argument(
         "--git-credentials-path",
         default="/tmp/gh-scoped-creds",
         help="""
@@ -110,6 +117,7 @@ def main(args=None, in_jupyter=False):
         f"Success! Authentication will expire in {expires_in_hours:0.1f} hours.\n"
         f"Process completed on: {time.asctime()}."
     )
+
     if in_jupyter:
         from IPython.display import HTML, display
 
@@ -117,6 +125,9 @@ def main(args=None, in_jupyter=False):
         display(HTML(f'<p style="background-color:lightgreen;">{success_html}</p>'))
     else:
         print(success)
+
+    if args.github_app_url:
+        print(f'Visit {args.github_app_url} to manage list of repositories you can push to from this location')
 
 
 try:
