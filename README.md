@@ -84,8 +84,7 @@ pip install gh-scoped-creds
    to provide appropriate authentication, by writing to a `/tmp/gh-scoped-creds`
    file. This makes sure we don't override the default `~/.git-credentials` file
    someone might be using. `git` will be automatically configured (via an entry
-   in `~/.gitconfig`) to use this file for github.com credentials.  the new
-   file.
+   in `~/.gitconfig`) to use this file for github.com credentials.
 
    **Note for non-container uses**: If your users are on a HPC system or similar,
    where `/tmp` is not isolated for each user, you must set the file path to be
