@@ -80,7 +80,12 @@ pip install gh-scoped-creds
 	`GH_SCOPED_CREDS_CLIENT_ID`, or be passed in as a commandline parameter `--client-id` to
 	the `gh-scoped-creds` script when users use it to authenticate.
 
-1. `gh-scoped-creds` uses [`git-credentials-store`](https://git-scm.com/docs/git-credential-store)
+2. Users will need to explicitly grant access to the repos they want to push to from
+   this particular JupyterHub or HPC system (see Usage section below). Admins can set
+   the `GH_SCOPED_CREDS_APP_URL` environment variable to inform users where to go
+   to manage this access - `gh-scoped-creds` will print this out after authentication.
+
+3. `gh-scoped-creds` uses [`git-credentials-store`](https://git-scm.com/docs/git-credential-store)
    to provide appropriate authentication, by writing to a `/tmp/gh-scoped-creds`
    file. This makes sure we don't override the default `~/.git-credentials` file
    someone might be using. `git` will be automatically configured (via an entry
@@ -106,6 +111,9 @@ this list afterwards, to make sure you only grant the required permissions.
 Given the common usage pattern where you are only pushing to a limited
 set of repositories from a particular hosted service, this should hopefully
 not be too cumborsome.
+
+Admins can set the `GH_SCOPED_CREDS_APP_URL` to the *Public Link* of the GitHub
+app to make it easier for users to know where to go.
 
 ### Authenticate to GitHub
 
