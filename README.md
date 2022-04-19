@@ -85,18 +85,6 @@ pip install gh-scoped-creds
    the `GH_SCOPED_CREDS_APP_URL` environment variable to inform users where to go
    to manage this access - `gh-scoped-creds` will print this out after authentication.
 
-3. `gh-scoped-creds` uses [`git-credentials-store`](https://git-scm.com/docs/git-credential-store)
-   to provide appropriate authentication, by writing to a `/tmp/gh-scoped-creds`
-   file. This makes sure we don't override the default `~/.git-credentials` file
-   someone might be using. `git` will be automatically configured (via an entry
-   in `~/.gitconfig`) to use this file for github.com credentials.
-
-   **Note for non-container uses**: If your users are on a HPC system or similar,
-   where `/tmp` is not isolated for each user, you must set the file path to be
-   under `$HOME`. The `gh-scoped-creds` commandline tool used by end users
-   (documented below) accepts a `--git-credentials-path` that can be explicitly
-   set.
-
 ## Usage
 
 ### Grant access to the GitHub app

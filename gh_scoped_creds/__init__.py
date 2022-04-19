@@ -2,6 +2,7 @@ import argparse
 import os
 import subprocess
 import sys
+import tempfile
 import time
 
 import requests
@@ -76,13 +77,6 @@ def main(args=None, in_jupyter=False):
         URL where users can install & grant repo access to the app
         """.strip(),
     )
-    argparser.add_argument(
-        "--git-credentials-path",
-        default="/tmp/gh-scoped-creds",
-        help="""
-        Path to write the git-credentials file to. Current contents will be overwritten!
-        """.strip(),
-    )
 
     args = argparser.parse_args(args)
 
@@ -95,22 +89,21 @@ def main(args=None, in_jupyter=False):
 
     access_token, expires_in = do_authenticate_device_flow(args.client_id, in_jupyter)
 
-    # Create the file with appropriate permissions (0600) so other users can't read it
-    with open(
-        os.open(args.git_credentials_path, os.O_WRONLY | os.O_CREAT, 0o600), "w"
-    ) as f:
+    # Create a secure temporary file and write the creds to it
+    with tempfile.NamedTemporaryFile(delete=False, mode="w+") as f:
         f.write(f"https://x-access-token:{access_token}@github.com\n")
+        f.flush()
 
-    # Tell git to use our new creds when talking to github
-    subprocess.check_call(
-        [
-            "git",
-            "config",
-            "--global",  # Modifies ~/.gitconfig
-            "credential.https://github.com.helper",
-            f"store --file={args.git_credentials_path}",
-        ]
-    )
+        # Tell git to use our new creds when talking to github
+        subprocess.check_call(
+            [
+                "git",
+                "config",
+                "--global",  # Modifies ~/.gitconfig
+                "credential.https://github.com.helper",
+                f"store --file={f.name}",
+            ]
+        )
 
     expires_in_hours = expires_in / 60 / 60
     success = f"Success! Authentication will expire in {expires_in_hours:0.1f} hours.\n"
