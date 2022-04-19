@@ -1,8 +1,8 @@
 import argparse
 import os
 import subprocess
-import tempfile
 import sys
+import tempfile
 import time
 
 import requests
@@ -90,7 +90,7 @@ def main(args=None, in_jupyter=False):
     access_token, expires_in = do_authenticate_device_flow(args.client_id, in_jupyter)
 
     # Create a secure temporary file and write the creds to it
-    with tempfile.NamedTemporaryFile(delete=False, mode='w+') as f:
+    with tempfile.NamedTemporaryFile(delete=False, mode="w+") as f:
         f.write(f"https://x-access-token:{access_token}@github.com\n")
         f.flush()
 
