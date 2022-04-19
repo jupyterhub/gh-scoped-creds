@@ -125,7 +125,7 @@ The hosted service must have `gh-scoped-creds` installed.
    ```python
    import gh_scoped_creds
 
-   %ghscopedauth
+   %ghscopedcreds
    ```
 
    This will offer to open the page in a new window for you, and conveniently
