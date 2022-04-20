@@ -120,6 +120,8 @@ def main(args=None, in_jupyter=False):
         print(
             f"Visit {args.github_app_url} to manage list of repositories you can push to from this location"
         )
+    # This only sets up credentials for https, not for ssh!
+    print('Tip: Use https:// URLs to clone and push to repos, not ssh URLs!')
 
 
 try:
