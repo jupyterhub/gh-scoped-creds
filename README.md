@@ -3,7 +3,7 @@
 Provide finely scoped push access to GitHub from a JupyterHub or
 HPC system.
 
-![](screencast.mp4)
+<video src="screencast.mp4">
 
 ## Goals
 
