@@ -22,13 +22,20 @@ repos:
     rev: 5.10.1
     hooks:
       - id: isort
+        args:
+          - --profile=black
 
   # Autoformat: Python code
   - repo: https://github.com/psf/black
     rev: 22.6.0
     hooks:
       - id: black
-        args: [--target-version=py36]
+        args:
+          - --target-version=py36
+          - --target-version=py37
+          - --target-version=py38
+          - --target-version=py39
+          - --target-version=py310
 
   # Linting: Python code (see the file .flake8)
   - repo: https://github.com/PyCQA/flake8
