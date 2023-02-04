@@ -89,9 +89,10 @@ pip install gh-scoped-creds
 
 ### Grant access to the GitHub app
 
-Users will first need to go to the public page of the GitHub app, and
-'Install' the app on their account and in organizations with repos they
-want to push to. We *highly* recommend allowing access only to selected
+Users will first need to go to the public page of the GitHub app, and click
+'Install App' on their account and in organizations. Clicking 'Install' next 
+to the accounts brings up a page where repository push access can be specified.
+We *highly* recommend allowing access only to selected
 repositories, and explicitly select the repositories this hosted service
 (JupyterHub, HPC cluster, etc) should be able to push to. You can modify
 this list afterwards, to make sure you only grant the required permissions.
