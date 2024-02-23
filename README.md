@@ -120,11 +120,6 @@ The hosted service must have `gh-scoped-creds` installed.
    This will offer to open the page in a new window for you, and conveniently
    copy the code you need to paste in the new window too.
 
-   If you're on a non-containerized system (like a HPC), you must
-   also specify the path to put the credentials files in explicitly
-   with `--git-credentials-path`. The same path must be used in the
-   `gitconfig` configuration mentioned earlier.
-
 2. It should give you a link to go to, and a code to input into the web page
    when that link is opened. Open the link, enter the code there (the page accepts
    pasting, so you can copy it from the output).
