@@ -3,6 +3,8 @@
 Provide finely scoped push access to GitHub from a JupyterHub or
 HPC system.
 
+<video src="screencast.mp4"></video>
+
 ## Goals
 
 1. Allow users on a JupyterHub to grant push access to only *specific
