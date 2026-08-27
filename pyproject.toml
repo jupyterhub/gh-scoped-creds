@@ -1,0 +1,37 @@
+[build-system]
+requires = ["setuptools>=77", "setuptools-scm"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "gh-scoped-creds"
+license = "BSD-3-Clause"
+version = "4.1.0"
+dynamic = ["readme"]
+description = "Temporary, well scoped credentials for pushing to GitHub"
+authors = [
+    { name = "Yuvi Panda", email = "yuvipanda@gmail.com"},
+    { name = "Project Jupyter Contributors", email = "jupyter@googlegroups.com" },
+]
+requires-python = ">=3.10"
+dependencies = [
+    "requests",
+]
+
+[project.urls]
+Source = "https://github.com/jupyterhub/gh-scoped-creds"
+
+[project.scripts]
+github-app-user-auth = "gh_scoped_creds:main"
+gh-scoped-creds = "gh_scoped_creds:main"
+
+
+# dynamic sources of metadata in other files
+[tool.setuptools.dynamic]
+readme = { file = "README.md", content-type = "text/markdown" }
+
+# isort is used for autoformatting Python code
+#
+# ref: https://pycqa.github.io/isort/
+#
+[tool.isort]
+profile = "black"

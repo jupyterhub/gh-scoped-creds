@@ -28,20 +28,20 @@ For you to follow along according to these instructions, you need:
    git clean -xfd
    ```
 
-1. Set the `version` field in setup.py appropriately and make a commit.
+1. Set the `version` field in pyproject.toml appropriately and make a commit.
 
    ```shell
-   git add setup.py
+   git add pyproject.toml
    VERSION=...  # e.g. 1.2.3
    git commit -m "release $VERSION"
    git tag -a $VERSION -m $VERSION HEAD
    ```
 
-1. Reset the version field in setup.py appropriately with an incremented patch
+1. Reset the version field in pyproject.toml appropriately with an incremented patch
    version and a dev element, then make a commit.
 
    ```shell
-   git add setup.py
+   git add pyproject.toml
    git commit -m "back to dev"
    ```
 
